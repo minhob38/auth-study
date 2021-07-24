@@ -1,0 +1,15 @@
+.input-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.input-text {
+  width: 200px;
+  height: 30px;
+}
+
+.submit-btn {
+  width: 200px;
+  height: 30px;
+}

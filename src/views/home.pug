@@ -1,6 +1,10 @@
-doctype html
-html
-  head
-    title hello
-  body
-    div hello world
+extends ./layout.pug
+
+block stylesheet
+  link(rel="stylesheet" href="/home.css")
+
+block content
+  div.btn-container
+    a(href="/sign-up") sign-up
+    a(href="/sign-in") sign-in
+    a(href="/sign-out") sign-out
