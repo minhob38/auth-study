@@ -6,12 +6,13 @@ const Pug = require("koa-pug");
 const serve = require("koa-static");
 const http = require("http");
 
-const app = new Koa();
+const app: Koa = new Koa();
 const router = new Router();
 const pug = new Pug({
   viewPath: path.join(__dirname, "/views"),
   app: app,
 });
+console.log(path.join(__dirname, "/views"))
 
 const server = http.createServer(app.callback());
 
