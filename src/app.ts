@@ -1,18 +1,18 @@
 const path = require("path");
 const Koa = require("koa");
 const Router = require("@koa/router");
+const bodyparser = require("koa-bodyparser");
 const logger = require("koa-logger");
 const Pug = require("koa-pug");
 const serve = require("koa-static");
 const http = require("http");
 
-const app: Koa = new Koa();
+const app = new Koa();
 const router = new Router();
 const pug = new Pug({
   viewPath: path.join(__dirname, "/views"),
   app: app,
 });
-console.log(path.join(__dirname, "/views"))
 
 const server = http.createServer(app.callback());
 
@@ -20,11 +20,17 @@ const server = http.createServer(app.callback());
 
 app.use(logger());
 
-app.use(serve(path.join(__dirname, "/public/stylesheets")));
+app.use(serve(path.join(__dirname, "/public")));
+
+app.use(bodyparser());
 
 router.get("/", (ctx, next) => ctx.render("home"));
-router.get("/sign-up", (ctx, next) => ctx.render("auth", { isSignUp: true }));
-router.get("/sign-in", (ctx, next) => ctx.render("auth", { isSignUp: false }));
+router.get("/auth/sign-up", (ctx, next) => ctx.render("auth", { isSignUp: true }));
+router.get("/auth/sign-in", (ctx, next) => ctx.render("auth", { isSignUp: false }));
+
+router.post("/auth/sign-up", (ctx, next) => {
+  ctx.request.ctx.body = "hello";
+});
 
 app.use(router.routes());
 
