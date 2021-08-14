@@ -9,6 +9,7 @@ const Pug = require("koa-pug");
 const serve = require("koa-static");
 const http = require("http");
 const authRouter = require("./routes/auth");
+const dummyRouter = require("./routes/dummy");
 
 const app = new Koa();
 const router = new Router();
@@ -26,5 +27,6 @@ app.use(serve(path.join(__dirname, "/public")));
 app.use(bodyparser());
 
 app.use(authRouter.routes());
+app.use(dummyRouter.routes());
 
 module.exports = server;

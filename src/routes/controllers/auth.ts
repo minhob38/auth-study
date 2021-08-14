@@ -1,7 +1,9 @@
 export {};
 
 const bcrypt = require("bcrypt");
+const jwt = require("jsonwebtoken");
 const knex = require("../../database/knexSetup");
+require("dotenv").config();
 
 exports.getSignUp = (ctx, next) => ctx.render("auth", { isSignUp: true });
 
@@ -25,7 +27,6 @@ exports.postSignUp = async (ctx, next) => {
     const hash = bcrypt.hashSync(password, salt);
 
     await knex("users").insert({ name, email, password: hash });
-    // const isPassword = bcrypt.compareSync(password, hash);
     ctx.type = "application/json";
     ctx.status = 201;
     return (ctx.body = {
@@ -37,9 +38,50 @@ exports.postSignUp = async (ctx, next) => {
     ctx.status = 500;
     return (ctx.body = {
       message: err.message,
-      status: "success",
+      status: "error",
     });
   }
 };
 
-exports.postSignIn = (ctx, next) => ctx.render("home");
+exports.postSignIn = async (ctx, next) => {
+  try {
+    const { email, password } = ctx.request.body;
+    const user = await knex("users").select("*").where({ email });
+
+    if (user.length === 0) {
+      ctx.type = "application/json";
+      ctx.status = 401;
+      return (ctx.body = {
+        message: "가입되지 않은 회원입니다.",
+        status: "error",
+      });
+    }
+
+    const hash = user[0].password;
+    const isPassword = await bcrypt.compareSync(password, hash);
+
+    if (!isPassword) {
+      ctx.type = "application/json";
+      ctx.status = 401;
+      return (ctx.body = {
+        message: "올바르지 않은 비밀번호입니다.",
+        status: "error",
+      });
+    }
+
+    const token = jwt.sign({ email }, process.env.TOKEN_SECRET_KEY, { expiresIn: "120" });
+    console.log(token);
+    ctx.type = "application/json";
+    ctx.status = 200;
+    return (ctx.body = {
+      token,
+    });
+  } catch (err) {
+    ctx.type = "application/json";
+    ctx.status = 500;
+    return (ctx.body = {
+      message: err.message,
+      status: "error",
+    });
+  }
+};

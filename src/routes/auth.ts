@@ -3,8 +3,11 @@ const { getSignUp, postSignUp, getSignIn, postSignIn } = require("./controllers/
 const router = new Router();
 
 router.get("/", postSignIn);
+
 router.get("/auth/sign-up", getSignUp);
-router.get("/auth/sign-in", getSignIn);
 router.post("/auth/sign-up", postSignUp);
+
+router.get("/auth/sign-in", getSignIn);
+router.post("/auth/sign-in", postSignIn);
 
 module.exports = router;
