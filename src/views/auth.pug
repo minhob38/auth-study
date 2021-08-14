@@ -6,9 +6,12 @@ block stylesheet
 block content
   - const btnVal = isSignUp ? "Sign-up" : "Sign-in";
   - const subAct = isSignUp ? "/auth/sign-up" : "/auth/sign-in";
+  - const mode = isSignUp ? "sign-up" : "sign-in";
   form.input-container(action=subAct, method="post")
     if isSignUp
       input.input-text(type="text", name="name", value="민호" placeholder="이름을 입력하세요 : )", autocomplete="off")
+    input.input-mode(type="text", name="mode", value=mode)
     input.input-text(type="email", name="email", value="minhob38@gmail.com" placeholder="이메일주소를 입력하세요 : )", autocomplete="off")
     input.input-text(type="password", name="password", placeholder="비밀번호를 입력하세요 : )", autocomplete="off")
     input.submit-btn(type="submit", value=btnVal)
+  script(src="/javascripts/auth.js")

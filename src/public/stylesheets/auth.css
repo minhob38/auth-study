@@ -4,6 +4,10 @@
   align-items: center;
 }
 
+.input-mode {
+  display: none;
+}
+
 .input-text {
   width: 200px;
   height: 30px;
