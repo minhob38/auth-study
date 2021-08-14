@@ -13,5 +13,4 @@ $button.addEventListener("click", async (ev) => {
   });
 
   const res = await _res.json();
-  console.log(res);
 });
