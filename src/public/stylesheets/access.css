@@ -1,0 +1,9 @@
+.btn-container {
+  display: flex;
+  flex-direction: column;
+}
+
+.button-access {
+  width: 200px;
+  height: 30px;
+}

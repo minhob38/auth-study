@@ -8,8 +8,10 @@ const logger = require("koa-logger");
 const Pug = require("koa-pug");
 const serve = require("koa-static");
 const http = require("http");
+
+const homeRouter = require("./routes/home");
 const authRouter = require("./routes/auth");
-const dummyRouter = require("./routes/dummy");
+const accessRouter = require("./routes/access");
 
 const app = new Koa();
 const router = new Router();
@@ -26,7 +28,8 @@ app.use(serve(path.join(__dirname, "/public")));
 
 app.use(bodyparser());
 
+app.use(homeRouter.routes());
 app.use(authRouter.routes());
-app.use(dummyRouter.routes());
+app.use(accessRouter.routes());
 
 module.exports = server;

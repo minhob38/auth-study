@@ -69,7 +69,7 @@ exports.postSignIn = async (ctx, next) => {
       });
     }
 
-    const token = jwt.sign({ email }, process.env.TOKEN_SECRET_KEY, { expiresIn: "120" });
+    const token = jwt.sign({ email }, process.env.TOKEN_SECRET_KEY, { expiresIn: 120 });
     console.log(token);
     ctx.type = "application/json";
     ctx.status = 200;
