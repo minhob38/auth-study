@@ -4,8 +4,10 @@
   "description": "",
   "main": "server.js",
   "scripts": {
-    "start": "tsc & nodemon -e ts --exec ts-node server.ts",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "nodemon -e ts --exec ts-node server.ts",
+    "transpile": "tsc",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "docker": "docker-compose up -d"
   },
   "author": "",
   "license": "ISC",

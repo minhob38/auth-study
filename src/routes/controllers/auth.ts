@@ -76,6 +76,7 @@ exports.postSignIn = async (ctx, next) => {
     return (ctx.body = {
       token,
     });
+    // To DO ... cookie 토큰 인증
   } catch (err) {
     ctx.type = "application/json";
     ctx.status = 500;

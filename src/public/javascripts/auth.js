@@ -29,5 +29,5 @@ $form.addEventListener("submit", async (ev) => {
   });
 
   const res = await _res.json();
-  localStorage.setItem("token", res.token); // token 저장 1) local stroage
+  localStorage.setItem("token", res.token); // token 저장 (web storage)
 });
