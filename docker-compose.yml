@@ -1,6 +1,6 @@
 version: "3.0"
 services:
   mynodeserver:
-    image: mynodeimage:latest
+    image: my-server-image:latest
     ports:
       - "3000:3000"

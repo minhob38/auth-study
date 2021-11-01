@@ -6,3 +6,6 @@ COPY . .
 RUN npm install
 EXPOSE 3000
 CMD npm start
+
+# docker build -t my-server-image:latest .
+# expose는 단순히 documentaion
